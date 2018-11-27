@@ -32,9 +32,9 @@
 				<Grid Grid.Row="3" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
 					<StackLayout VerticalOptions="Center" Padding="5,10" >
 						<Label x:Name="navigate" FontAttributes="Bold" Text=" NAVIGATING AROUND " VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
-						<Label x:Name="navigation_info1" FontSize="Medium" LineBreakMode ="WordWrap" Text="From the start screen, you can choose the level of difficulty to which you wold love to set your game. There are three levels of difficutly available." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+						<Label x:Name="navigation_info1" FontSize="Medium" LineBreakMode ="WordWrap" Text="From the start screen, you can choose the level of difficulty to which you would love to set your game. There are three levels of difficutly available." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
 						<Label x:Name="navigation_info2" FontSize="Medium" LineBreakMode ="WordWrap" Text="After choosing the level of difficulty, Click the start button to start the game." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
-						<Label x:Name="navigation_info3" FontSize="Medium" LineBreakMode ="WordWrap" Text="While playing the game, you may click the pause button to pause the game or resume butto to resume your game! " VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+						<Label x:Name="navigation_info3" FontSize="Medium" LineBreakMode ="WordWrap" Text="While playing the game, you may click the pause button to pause the game or resume button to resume your game! " VerticalOptions="Center"  Margin="0,-1,0,-1"/>
 					</StackLayout>
 				</Grid>
 				<Grid Grid.Row="4" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
