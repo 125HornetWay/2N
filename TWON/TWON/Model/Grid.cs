@@ -82,8 +82,6 @@ namespace TWON
 			{
 				Tiles[i] = new Tile();
 			}
-
-			Debug.WriteLine(this.Serialize());
 		}
 
 		public Grid() : this(4) { }
@@ -107,7 +105,7 @@ namespace TWON
 
 		public int GetIndex(int x, int y)
 		{
-			return (x + y) * _columns;
+			return y + x * _columns;
 		}
 
 		public Move MoveTile(int i, Direction d)
@@ -116,14 +114,14 @@ namespace TWON
 			bool combination = false;
 			bool pieceShifted = true;
 			Tile tile = Tiles[i];
-			while (pieceShifted)
+			while (pieceShifted && !combination)
 			{
 
 				// going up = subtracting _columns
 				// going down = adding _columns
 				// going left = subtracting one
 				// going right = adding one
-				int testIndex;
+				int testIndex = Int32.MinValue;
 				switch (d)
 				{
 					case Direction.Down:
@@ -144,17 +142,25 @@ namespace TWON
 
 				try
 				{
-					if (Tiles[testIndex].Value == 0)
+					var moves = GetDirections()[finalIndex];
+					if (GetDirections()[finalIndex].Contains(d))
 					{
-						// If a position is empty
-						finalIndex = testIndex;
-					}
-					else if (Tiles[testIndex].Value == Tiles[i].Value)
-					{
-						// If the tile can be combined
-						combination = true;
-					}
-					else
+						if (Tiles[testIndex].Value == 0)
+						{
+							// If a position is empty
+							finalIndex = testIndex;
+						}
+						else if (Tiles[testIndex].Value == Tiles[i].Value)
+						{
+							// If the tile can be combined
+							finalIndex = testIndex;
+							combination = true;
+						}
+						else
+						{
+							pieceShifted = false;
+						}
+					} else
 					{
 						pieceShifted = false;
 					}
@@ -257,35 +263,51 @@ namespace TWON
 			if (dir == Direction.Down || dir == Direction.Right)
 			{
 				// Count i down
+				for (int i = _gridSize - 1; i >= 0; --i)
+				{
+					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+					{
+						moves.Add(MoveTile(i, dir));
+					}
+				}
 			} else
 			{
 				// Count i up
-			}
-
-			// Move into if statement
-			for (int i = 0; i < _gridSize; ++i)
-			{
-				if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+				for (int i = 0; i < _gridSize; ++i)
 				{
-					moves.Add(MoveTile(i, dir));
+					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+					{
+						moves.Add(MoveTile(i, dir));
+					}
 				}
 			}
 
 			int newTile = PlaceTile();
 			moves.Add(new Spawn(newTile, Tiles[newTile]));
-			
 
 			return moves;
 		}
 
-		public string Save()
+		public override string ToString()
 		{
-			return this.XmlSerializeToString();
-		}
+			string output = "";
 
-		public Grid Load(string data)
-		{
-			return data.XmlDeserializeFromString<Grid>();
+			for (int i = 0; i < Tiles.Length; i++)
+			{
+				output += Tiles[i].Value;
+				for (int j = 0; j < (4 - Convert.ToString(Tiles[i].Value).Length); j++)
+				{
+					output += " ";
+				}
+				
+
+				if (i % (_columns) == 3)
+				{
+					output += "\n";
+				}
+			}
+
+			return output;
 		}
 
 

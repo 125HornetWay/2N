@@ -14,7 +14,7 @@ namespace TWON.View.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GamePage : ContentPage
 	{
-		Grid Model;
+		public Grid Model;
 		public GamePage()
 		{
 			InitializeComponent();
@@ -23,11 +23,14 @@ namespace TWON.View.Pages
 
 			Model.PlaceTile();
 
+			Debug.WriteLine(Model.Serialize());
+			Debug.WriteLine(Model.ToString());
+
 			int i = 0;  // Yes I know this is convoluted
 			foreach (Tile tile in Model.Tiles)
 			{
 				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
-				GameGrid.Children.Add(TileElement, Model.GetRow(i), Model.GetColumn(i));
+				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
 				i++;
 			}
 
@@ -77,18 +80,20 @@ namespace TWON.View.Pages
 
 		private void MoveTiles(List<Move> moves)
 		{
-			foreach (Move move in moves)
+			Debug.WriteLine(Model.Serialize());
+			Debug.WriteLine(Model.ToString());
+			/*foreach (Move move in moves)
 			{
 
 				if (move.GetType() == typeof(Shift))
 				{
 					Shift sMove = move as Shift;
 
-					int cX = Model.GetColumn(sMove.i);
-					int cY = Model.GetRow(sMove.i);
+					int cY = Model.GetColumn(sMove.i);
+					int cX = Model.GetRow(sMove.i);
 
-					int nX = Model.GetColumn(sMove.newIndex);
-					int nY = Model.GetRow(sMove.newIndex);
+					int nY = Model.GetColumn(sMove.newIndex);
+					int nX = Model.GetRow(sMove.newIndex);
 					int nI = Model.GetIndex(nX, nY);
 
 					Xamarin.Forms.Grid.SetColumn(GameGrid.Children[sMove.i], nX);
@@ -106,10 +111,11 @@ namespace TWON.View.Pages
 					lbl.Text = Convert.ToString(move.tile.Value);
 				} else
 				{
+					// Combination
 					throw new NotImplementedException();
 				}
 				
-			}
+			}*/
 		}
 
 		private void MoveDown(object sender, EventArgs e)
