@@ -1,12 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TWON.View.Pages.DifficultyScreen">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+	<ContentPage.Content>
+		<ScrollView>
+			<Grid ColumnSpacing="0" RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="AUTO" />
+					<RowDefinition Height="AUTO" />
+				</Grid.RowDefinitions>
+		
+		<Grid Grid.Row="1" Margin="0,30" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Center">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<StackLayout>
+			<Button x:Name="Level1" HeightRequest="200" Text="Normal" Clicked="Level1_Clicked" BackgroundColor="BurlyWood" WidthRequest="100"/>
+		</StackLayout>
+
+		<StackLayout Grid.Column="1">
+			<Button x:Name="Level2" HeightRequest="200" Text="Medium" Clicked="Level2_Clicked" BackgroundColor="GreenYellow" WidthRequest="100"/>
+		</StackLayout>
+
+		<StackLayout Grid.Column="2">
+			<Button x:Name="Level3" HeightRequest="200" Text="Hard" Clicked="Level3_Clicked" BackgroundColor="IndianRed" WidthRequest="100"/>
+		</StackLayout>
+		
+		</Grid>
+		<Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="Center">
+		<StackLayout Grid.Column="2" HorizontalOptions="Center">
+		<Button x:Name="Back" Text="Back" Clicked="Back_Clicked"  BackgroundColor="IndianRed" WidthRequest="100"/>
+		</StackLayout>
+		</Grid>
+
+				</Grid>
+</ScrollView>
+
+	</ContentPage.Content>
 </ContentPage>

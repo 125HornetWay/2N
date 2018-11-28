@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +16,28 @@ namespace TWON.View.Pages
 		{
 			InitializeComponent ();
 		}
+
+		private void Level2_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new GamePage();
+		}
+
+		private void Level3_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new GamePage();
+		}
+
+		private void Level1_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new GamePage();
+		}
+
+		
+
+		private void Back_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new StartPage();
+		}
 	}
-}
+	}
+

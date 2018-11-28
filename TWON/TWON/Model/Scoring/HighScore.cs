@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
+using TWON.Model;
 
 namespace TWON
 {
 	public class HighScore
 	{
-		public static List<HighScore> HighScores = new List<HighScore>();
+	
 		public string Name { get; set; }
 		public int Score { get; set; }
 		static int CurrentHighestScore;
@@ -24,18 +25,18 @@ namespace TWON
 			int Counter = 0;
 			HighScore NewHighScore;
 
-			while (High == false || HighScores.Count == 0)
-			{	if(HighScores.Count == 0)
+			while (High == false || HightScoreCollection.HighScores.Count == 0)
+			{	if(HightScoreCollection.HighScores.Count == 0)
 				{
 					NewHighScore = new HighScore(RecievedName, RecievedScore);
-					HighScores.Add(NewHighScore);
+					HightScoreCollection.HighScores.Add(NewHighScore);
 					High = true;
 				}
 				 
-				else if (HighScores[Counter].Score < RecievedScore)
+				else if (HightScoreCollection.HighScores[Counter].Score < RecievedScore)
 				{
 					NewHighScore = new HighScore(RecievedName, RecievedScore);
-					HighScores.Add(NewHighScore);
+					HightScoreCollection.HighScores.Add(NewHighScore);
 					High = true;
 				}
 				++Counter;
@@ -43,57 +44,13 @@ namespace TWON
 
 			return High;
 		}
-		public void OrganiseList()
-		{
-			int MaximumSize = 10;
-			if (HighScores.Count > MaximumSize)
-			{
-				int LeastScore = 0;
-				HighScore Smallest = null;
-				foreach (HighScore item in HighScores)
-				{
-					if (item.Score < LeastScore)
-					{
-						LeastScore = item.Score;
-						Smallest = item;
-					}
-				}
-				HighScores.Remove(Smallest);
-			}
-			//sort list by scores
-		}
+		
 
 		//Adds a player's name and score to  high score file
-		public void Save(List<HighScore> HighScores)
-		{ int count = 1;
-			foreach(HighScore score in HighScores)
-			{
-				string data = count.ToString() + ' ' + score.Name + ' ' + score.Score;
-				using (StreamWriter writer = new StreamWriter("HighScores.txt"))
-				{
-					writer.WriteLine(data);
-				}
-				++count;
-			}
-		}
+		
 
 		//Returns all the high scores and correspoinding player names from a file
-		public List<string> Load()
-		{
-			List<string> HighScoreData = new List<string>();
-			string line = "nothing yet";
-			while (line != "" && line != null)
-			{
-				using (StreamReader rd = new StreamReader("HighScores.txt"))
-				{
-					line = rd.ReadLine();
-					HighScoreData.Add(line);
-				}
-			}
-
-			return HighScoreData;
-		}
-
+		
 		//Returns the best score from a file to be displayed on the leader board. 
 		public string SetBestScore(int NewScore)
 		{

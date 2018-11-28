@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,11 @@ namespace TWON.View.Pages
 		public HelpScreen ()
 		{
 			InitializeComponent ();
+		}
+
+		private void Level3_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new StartPage();
 		}
 	}
 }

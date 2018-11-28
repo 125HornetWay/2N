@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TWON.View.Pages.HelpScreen">
+             x:Class="TWON.View.Pages.HelpScreen"
+			 BackgroundColor="DarkCyan">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+		<ScrollView>
+			<Grid ColumnSpacing="0" RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="AUTO" />
+					<RowDefinition Height="AUTO" />
+					<RowDefinition Height="AUTO" />
+					<RowDefinition Height="AUTO" />
+				</Grid.RowDefinitions>
+
+				<Grid Grid.Row="1" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+					<StackLayout VerticalOptions="Center" Padding="5,10">
+						<Label x:Name ="play" FontAttributes="Bold" Text="HOW TO PLAY 2N" VerticalOptions="Center" BackgroundColor="LightSkyBlue"/>
+						<Label x:Name ="play_info" LineBreakMode ="WordWrap" Text="To play, use the arrow keys to shift the tiles left, right, up or down.The goal is to combine like tiles. Therefore, shift the buttons in the direction that enables the like tiles to combine." VerticalOptions="Center" Margin="0,-1,0,-1" FontSize="Medium" FontFamily=""  />
+					</StackLayout>
+
+				</Grid>
+
+				<Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+					<StackLayout VerticalOptions="Center" Padding="5,10">
+
+						<Label x:Name="Scoreing" FontAttributes="Bold" Text=" HOW TO GET A GOOD SCORE " VerticalOptions="Center" BackgroundColor="LightSkyBlue"/>
+						<Label x:Name="scoring_info" FontSize="Medium" LineBreakMode ="WordWrap"   FlexLayout.AlignSelf="Center"  Text="In order to reach easily reach a high score. Focus on combining any like tiles that are close to each other on the board." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+					</StackLayout>
+				</Grid>
+
+				<Grid Grid.Row="3" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+					<StackLayout VerticalOptions="Center" Padding="5,10" >
+						<Label x:Name="navigate" FontAttributes="Bold" Text=" NAVIGATING AROUND " VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
+						<Label x:Name="navigation_info1" FontSize="Medium" LineBreakMode ="WordWrap" Text="From the start screen, you can choose the level of difficulty to which you would love to set your game. There are three levels of difficutly available." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+						<Label x:Name="navigation_info2" FontSize="Medium" LineBreakMode ="WordWrap" Text="After choosing the level of difficulty, Click the start button to start the game." VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+						<Label x:Name="navigation_info3" FontSize="Medium" LineBreakMode ="WordWrap" Text="While playing the game, you may click the pause button to pause the game or resume button to resume your game! " VerticalOptions="Center"  Margin="0,-1,0,-1"/>
+					</StackLayout>
+				</Grid>
+				<Grid Grid.Row="4" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+				<StackLayout HorizontalOptions="Center">
+					<Button x:Name="Level3" Text="Back" Clicked="Level3_Clicked"  BackgroundColor="IndianRed"  WidthRequest="50"/>
+				</StackLayout>
+				</Grid>
+
+				</Grid>
+		</ScrollView>
+	</ContentPage.Content>
 </ContentPage>

@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TWON.View.AboutScreen">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="TWON.View.AboutScreen"
+			 BackgroundColor="DeepSkyBlue">
+	<ContentPage.Content>
+		<ScrollView>
+			<StackLayout HorizontalOptions="Center" >
+				<StackLayout VerticalOptions="Center">
+					<Label x:Name="Developers" Text="Developers" FontSize="Medium" FontAttributes="Bold"/>
+				<StackLayout HeightRequest="100">
+					<Label  x:Name ="Matthew" Text="Matthew Miller"  FontAttributes="Bold"/>
+					<Label x:Name="Matthew_Description" Text="Game model design, view manupulation and game timing "/>
+				</StackLayout>
+				<StackLayout HeightRequest="100">
+					<Label  x:Name ="Dorcas" Text="Docas Lanyero" FontAttributes="Bold"/>
+					<Label x:Name="Dorcas_Description" Text="Game screens and tile animations"/>
+				</StackLayout>
+			</StackLayout>
+				<StackLayout VerticalOptions="Center">
+					<StackLayout HeightRequest="100">
+						<Label  x:Name ="Version" Text="Version" FontSize="Medium" FontAttributes="Bold"/>
+						<Label Text="This is a re-make of original 2048"/>
+					</StackLayout>
+				</StackLayout>
+				<StackLayout VerticalOptions="Center">
+					<StackLayout HeightRequest="100">
+
+						<Label  x:Name ="Features" Text="Features" FontSize="Medium" FontAttributes="Bold"/>
+						<Label Text="Classic (4x4) grid"/>
+						<Label Text="Simple and beautiful design"/>
+						<Label Text="High socore and leader board"/>
+						
+					</StackLayout>
+				</StackLayout>
+				<StackLayout>
+					<Button x:Name="Back" Text="Back" FontAttributes="Bold" BackgroundColor="Beige" Clicked="Back_Clicked"/>
+				</StackLayout>
+			</StackLayout>
+			
+
+		</ScrollView>
+	</ContentPage.Content>
 </ContentPage>
