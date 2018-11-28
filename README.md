@@ -1,4 +1,4 @@
-# 2N
+# 2N (Alpha)
 Customized 2048 clone
 
 ## Instructions
@@ -59,5 +59,59 @@ https://github.com/125HornetWay/2N/wiki/Matthew's-Journal
 
 Total: 6:21
 Time Remaining: 51:39
+
+https://github.com/125HornetWay/2N/wiki/Dorcas'-Journal
+
+# 2N (Beta)
+Customized 2048 clone
+
+## Instructions
+
+[Not working in Beta]
+
+Model logic is not fully functinal. The program breaks after one move. 
+
+### Note:
+The demo is not audible. All that is being demonstarated is navigation from the start screen to the different screens available in the game. These are the about screen, the help screen, the difficulty screen and the game screen. The About screen contains basic information about the game,  the developers and the specifications. The Help screen consists of some guide lines on how to navigate around and how to play the game. The difficulty screen contains afew buttons from which the user can select the level of diffuculty they would love to use for their game. The timer is at the top of the game screen. 
+
+## Work completed
+
+* ABout Screen
+* Help screen
+* Difficulty screen
+* Scores
+* Game timing
+* Game Model
+
+## Known Issues
+
+Game is playable but breaks after one move. 
+
+## Demo
+
+https://youtu.be/I7BdzzuZQoQ
+
+## Expenses
+
+### Matthew Miller
+| Date | Task | Time Spent|
+|------|------|-----------|
+| **Beta** | | **23:36** |
+
+
+Total: 29.49
+Time Remaining: 26.11:47
+
+https://github.com/125HornetWay/2N/wiki/Matthew's-Journal
+
+## Dorcas Lanyero
+
+| Date | Task | Time Spent|
+|------|------|-----------|
+| **Beta** | | **12:28** |
+
+
+Total: 18.49
+Time Remaining: 39:11
 
 https://github.com/125HornetWay/2N/wiki/Dorcas'-Journal
