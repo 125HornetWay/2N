@@ -16,7 +16,7 @@ namespace TWON
 	{
 		public EventHandler<object> UpdateTimeEvent;
 		public Tile[] Tiles { get; set; }
-		public bool GameOver => Tiles.All(tile => tile.Value > 0);
+		public bool GameOver = false;
 		public bool cheatMode = false;
 
 		public TimeSpan Time = TimeSpan.Zero;
@@ -267,7 +267,9 @@ namespace TWON
 				{
 					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
 					{
-						moves.Add(MoveTile(i, dir));
+						Move move = MoveTile(i, dir);
+						if (move != null)
+							moves.Add(move);
 					}
 				}
 			} else
@@ -277,13 +279,24 @@ namespace TWON
 				{
 					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
 					{
-						moves.Add(MoveTile(i, dir));
+						Move move = MoveTile(i, dir);
+						if (move != null)
+							moves.Add(move);
 					}
 				}
 			}
 
-			int newTile = PlaceTile();
-			moves.Add(new Spawn(newTile, Tiles[newTile]));
+			if (moves.Count > 0)
+			{
+				int newTile = PlaceTile();
+				moves.Add(new Spawn(newTile, Tiles[newTile]));
+			}
+
+
+			if (Tiles.All(tile => tile.Value > 0) && moves.Count == 0)
+			{
+				GameOver = true;
+			}
 
 			return moves;
 		}
@@ -295,13 +308,13 @@ namespace TWON
 			for (int i = 0; i < Tiles.Length; i++)
 			{
 				output += Tiles[i].Value;
-				for (int j = 0; j < (4 - Convert.ToString(Tiles[i].Value).Length); j++)
+				for (int j = 0; j < (5 - Convert.ToString(Tiles[i].Value).Length); j++)
 				{
 					output += " ";
 				}
 				
 
-				if (i % (_columns) == 3)
+				if (i % (_columns) == (_columns - 1))
 				{
 					output += "\n";
 				}
