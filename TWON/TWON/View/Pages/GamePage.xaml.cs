@@ -30,6 +30,7 @@ namespace TWON.View.Pages
 			foreach (Tile tile in Model.Tiles)
 			{
 				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+				if (tile.Value == 0) TileElement.IsVisible = false;
 				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
 				i++;
 			}
@@ -65,12 +66,62 @@ namespace TWON.View.Pages
 				TranslationY = -45
 			};
 
+			var EditBox = new Entry
+			{
+				Placeholder = Convert.ToString(value),
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.Center,
+				FontSize = 20,
+				TranslationY = -45,
+				IsVisible = false
+			};
 
 
 			RootEl.Children.Add(Background);
 			RootEl.Children.Add(label);
+			RootEl.Children.Add(EditBox);
+
+			TapGestureRecognizer tap = new TapGestureRecognizer();
+			tap.NumberOfTapsRequired = 1;
+			tap.CommandParameter = RootEl;
+			tap.Command = new Command((sender) =>
+			{
+				StackLayout root = sender as StackLayout;
+
+				root.Children[1].IsVisible = false;
+				root.Children[2].IsVisible = true;
+			});
+
+			RootEl.GestureRecognizers.Add(tap);
+			EditBox.Completed += Tile_Edited;
 
 			return RootEl;
+		}
+
+		private void Tile_Edited(object sender, EventArgs e)
+		{
+			Entry entry = sender as Entry;
+			Layout root = entry.Parent as Layout;
+			Label lbl = root.Children[1] as Label;
+
+			int x = Xamarin.Forms.Grid.GetColumn((StackLayout)root);
+			int y = Xamarin.Forms.Grid.GetRow((StackLayout)root);
+			int i = Model.GetIndex(x, y);
+
+			try
+			{
+				lbl.Text = entry.Text;
+				Model.Tiles[i].Value = Convert.ToInt32(entry.Text);
+			} catch
+			{
+
+			}
+			
+
+			entry.IsVisible = false;
+			lbl.IsVisible = true;
+
+			Debug.WriteLine(Model.ToString());
 		}
 
 		private void BackButton_Clicked(object sender, EventArgs e)
@@ -82,23 +133,27 @@ namespace TWON.View.Pages
 		{
 			Debug.WriteLine(Model.Serialize());
 			Debug.WriteLine(Model.ToString());
-			/*foreach (Move move in moves)
+			foreach (Move move in moves)
 			{
 
 				if (move.GetType() == typeof(Shift))
 				{
 					Shift sMove = move as Shift;
 
-					int cY = Model.GetColumn(sMove.i);
-					int cX = Model.GetRow(sMove.i);
+					// Get current coords
+					int cX = Model.GetColumn(sMove.i);
+					int cY = Model.GetRow(sMove.i);
 
-					int nY = Model.GetColumn(sMove.newIndex);
-					int nX = Model.GetRow(sMove.newIndex);
-					int nI = Model.GetIndex(nX, nY);
+					// Get new coords
+					int nX = Model.GetColumn(sMove.newIndex);
+					int nY = Model.GetRow(sMove.newIndex);
+					int nI = sMove.newIndex;
 
-					Xamarin.Forms.Grid.SetColumn(GameGrid.Children[sMove.i], nX);
+					// Set coords of current piece
 					Xamarin.Forms.Grid.SetRow(GameGrid.Children[sMove.i], nY);
+					Xamarin.Forms.Grid.SetColumn(GameGrid.Children[sMove.i], nX);
 
+					// Update element value
 					StackLayout el = (StackLayout)GameGrid.Children[nI];
 					Label lbl = (Label)el.Children[1];
 					lbl.Text = Convert.ToString(sMove.tile.Value);
@@ -107,6 +162,7 @@ namespace TWON.View.Pages
 				{
 
 					StackLayout el = (StackLayout)GameGrid.Children[move.i];
+					el.IsVisible = true;
 					Label lbl = (Label)el.Children[1];
 					lbl.Text = Convert.ToString(move.tile.Value);
 				} else
@@ -115,7 +171,7 @@ namespace TWON.View.Pages
 					throw new NotImplementedException();
 				}
 				
-			}*/
+			}
 		}
 
 		private void MoveDown(object sender, EventArgs e)
