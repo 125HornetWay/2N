@@ -140,8 +140,20 @@ namespace TWON.View.Pages
 				{
 					Shift sMove = move as Shift;
 
+					// Update element value
+					StackLayout el = (StackLayout)GameGrid.Children[sMove.newIndex];
+					Label lbl = (Label)el.Children[1];
+					lbl.Text = Convert.ToString(sMove.tile.Value);
+
+					el = (StackLayout)GameGrid.Children[sMove.i];
+					lbl = (Label)el.Children[1];
+					lbl.Text = Convert.ToString(0);
+
+					GameGrid.Children[sMove.newIndex].IsVisible = true;
+					GameGrid.Children[sMove.i].IsVisible = false;
+
 					// Get current coords
-					int cX = Model.GetColumn(sMove.i);
+					/*int cX = Model.GetColumn(sMove.i);
 					int cY = Model.GetRow(sMove.i);
 
 					// Get new coords
@@ -149,14 +161,18 @@ namespace TWON.View.Pages
 					int nY = Model.GetRow(sMove.newIndex);
 					int nI = sMove.newIndex;
 
-					// Set coords of current piece
-					Xamarin.Forms.Grid.SetRow(GameGrid.Children[sMove.i], nY);
-					Xamarin.Forms.Grid.SetColumn(GameGrid.Children[sMove.i], nX);
+					GameGrid.Children[sMove.i].IsVisible = true;
 
 					// Update element value
-					StackLayout el = (StackLayout)GameGrid.Children[nI];
+					StackLayout el = (StackLayout)GameGrid.Children[sMove.i];
 					Label lbl = (Label)el.Children[1];
 					lbl.Text = Convert.ToString(sMove.tile.Value);
+
+					// Need to move old piece somewhere so the indexes don't get rearranged
+
+					// Set coords of current piece
+					Xamarin.Forms.Grid.SetRow(GameGrid.Children[sMove.i], nY);
+					Xamarin.Forms.Grid.SetColumn(GameGrid.Children[sMove.i], nX);*/
 				}
 				else if (move.GetType() == typeof(Spawn))
 				{
@@ -168,7 +184,19 @@ namespace TWON.View.Pages
 				} else
 				{
 					// Combination
-					throw new NotImplementedException();
+					Combination sMove = move as Combination;
+
+					// Update element value
+					StackLayout el = (StackLayout)GameGrid.Children[sMove.combinedIndex];
+					Label lbl = (Label)el.Children[1];
+					lbl.Text = Convert.ToString(sMove.tile.Value);
+
+					el = (StackLayout)GameGrid.Children[sMove.i];
+					lbl = (Label)el.Children[1];
+					lbl.Text = Convert.ToString(0);
+
+					GameGrid.Children[sMove.combinedIndex].IsVisible = true;
+					GameGrid.Children[sMove.i].IsVisible = false;
 				}
 				
 			}

@@ -19,6 +19,8 @@ namespace TWON
 		public bool GameOver = false;
 		public bool cheatMode = false;
 
+		public int winningScore = 2048;
+
 		public TimeSpan Time = TimeSpan.Zero;
 
 		protected static CryptoRandom rand = new CryptoRandom();
@@ -179,12 +181,12 @@ namespace TWON
 				{
 					Tiles[finalIndex].Value = Tiles[i].Value + Tiles[finalIndex].Value;
 					Tiles[i].Value = 0;
-					return new Combination(i, finalIndex, Tiles[i]);
+					return new Combination(i, finalIndex, Tiles[finalIndex]);
 				} else
 				{
 					Tiles[finalIndex].Value = Tiles[i].Value;
 					Tiles[i].Value = 0;
-					return new Shift(i, finalIndex, Tiles[i]);
+					return new Shift(i, finalIndex, Tiles[finalIndex]);
 				}
 				
 			} else
@@ -293,7 +295,7 @@ namespace TWON
 			}
 
 
-			if (Tiles.All(tile => tile.Value > 0) && moves.Count == 0)
+			if ((Tiles.All(tile => tile.Value > 0) && moves.Count == 0) || Tiles.Any(tile => tile.Value == winningScore))
 			{
 				GameOver = true;
 			}
