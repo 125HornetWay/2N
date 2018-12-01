@@ -66,34 +66,37 @@ namespace TWON.View.Pages
 				TranslationY = -45
 			};
 
-			var EditBox = new Entry
-			{
-				Placeholder = Convert.ToString(value),
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center,
-				FontSize = 20,
-				TranslationY = -45,
-				IsVisible = false
-			};
-
-
 			RootEl.Children.Add(Background);
 			RootEl.Children.Add(label);
-			RootEl.Children.Add(EditBox);
 
-			TapGestureRecognizer tap = new TapGestureRecognizer();
-			tap.NumberOfTapsRequired = 1;
-			tap.CommandParameter = RootEl;
-			tap.Command = new Command((sender) =>
+			if (Model.cheatMode)
 			{
-				StackLayout root = sender as StackLayout;
+				var EditBox = new Entry
+				{
+					Placeholder = Convert.ToString(value),
+					HorizontalOptions = LayoutOptions.Center,
+					VerticalOptions = LayoutOptions.Center,
+					FontSize = 20,
+					TranslationY = -45,
+					IsVisible = false
+				};
 
-				root.Children[1].IsVisible = false;
-				root.Children[2].IsVisible = true;
-			});
+				RootEl.Children.Add(EditBox);
 
-			RootEl.GestureRecognizers.Add(tap);
-			EditBox.Completed += Tile_Edited;
+				TapGestureRecognizer tap = new TapGestureRecognizer();
+				tap.NumberOfTapsRequired = 1;
+				tap.CommandParameter = RootEl;
+				tap.Command = new Command((sender) =>
+				{
+					StackLayout root = sender as StackLayout;
+
+					root.Children[1].IsVisible = false;
+					root.Children[2].IsVisible = true;
+				});
+
+				RootEl.GestureRecognizers.Add(tap);
+				EditBox.Completed += Tile_Edited;
+			}
 
 			return RootEl;
 		}
