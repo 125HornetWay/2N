@@ -181,6 +181,8 @@ namespace TWON
 				{
 					Tiles[finalIndex].Value = Tiles[i].Value + Tiles[finalIndex].Value;
 					Tiles[i].Value = 0;
+					Animation.currentcombinations.Add(finalIndex);
+					Scores.UpdateScore(Tiles[i].Value + Tiles[finalIndex].Value);
 					return new Combination(i, finalIndex, Tiles[finalIndex]);
 				} else
 				{

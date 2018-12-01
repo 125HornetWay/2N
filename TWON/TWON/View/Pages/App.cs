@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using TWON.View.Pages;
+using TWON;
 
 namespace TWON
 {
@@ -21,7 +22,8 @@ namespace TWON
 		protected override void OnSleep()
 		{
 			// Handle when your app sleeps
-			
+			Application.Current.Properties["savedgame"] = GamePage.Model.Serialize();
+		
 
 		}
 

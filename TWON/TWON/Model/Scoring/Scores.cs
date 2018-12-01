@@ -6,21 +6,21 @@ namespace TWON
 {
     class Scores
     {
-		int Score = 0;
+		static int Score = 0;
 		public Scores()
 		{
 
 		}
 
 		//Takes the of tiles hat have been summed and adds them to the current score. 
-		public void ComputeSCore(int value)
+		public static void UpdateScore(int value)
 		{
 			Score += value;
 
 		}
 
 		//Return the current score.
-		public int GetScore()
+		public static int GetScore()
 		{
 			return Score;
 		}

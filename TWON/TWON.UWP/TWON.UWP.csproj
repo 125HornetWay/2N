@@ -103,6 +103,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\LionKing.mp3" />
+    <Content Include="LionKing.mp3" />
     <Content Include="2N.png" />
     <Content Include="2N_Start_Button.gif" />
     <Content Include="2n_Start_screen.png" />

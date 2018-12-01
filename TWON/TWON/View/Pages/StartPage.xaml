@@ -49,6 +49,7 @@
 				<Image Grid.Row ="3" HeightRequest = "250"  Source="StartScreen.gif" />
 				<!--  cheat button  -->
 				<Button x:Name="Cheat" Grid.Row="4" Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked"/>
+				<Button x:Name="Continue" Grid.Row="4" Margin="20"  Text="Continue Game" Clicked="Continue_Clicked"/>
 
 			</Grid>
 		</ScrollView>

@@ -14,7 +14,8 @@ namespace TWON.View.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GamePage : ContentPage
 	{
-		public Grid Model;
+		public static Grid Model;
+		public List<StackLayout> Mylabels = new List<StackLayout>();
 		public GamePage()
 		{
 			InitializeComponent();
@@ -32,6 +33,7 @@ namespace TWON.View.Pages
 				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
 				if (tile.Value == 0) TileElement.IsVisible = false;
 				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+				Mylabels.Add(TileElement);
 				i++;
 			}
 
@@ -96,6 +98,7 @@ namespace TWON.View.Pages
 			EditBox.Completed += Tile_Edited;
 
 			return RootEl;
+			//what if I save each of these layouts in a list then access them by index.
 		}
 
 		private void Tile_Edited(object sender, EventArgs e)
@@ -205,21 +208,68 @@ namespace TWON.View.Pages
 		private void MoveDown(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Down));
+			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			for (int item = 0; item < Mylabels.Count; ++item)
+			{
+				Mylabels[item].Children[1].RotateTo(360, 3000);
+				Mylabels[item].Children[0].RotateTo(360, 4000);
+				Mylabels[item].Children[2].RotateTo(360, 6000);
+
+			}
+
 		}
 
 		private void MoveUp(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Up));
+			MoveTiles(Model.ShiftTiles(Direction.Down));
+			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			for (int item = 0; item < Mylabels.Count; ++item)
+			{
+				Mylabels[item].Children[1].RotateTo(360, 3000);
+				Mylabels[item].Children[0].RotateTo(360, 4000);
+				Mylabels[item].Children[2].RotateTo(360, 6000);
+			}
 		}
 
 		private void MoveLeft(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Left));
+			MoveTiles(Model.ShiftTiles(Direction.Down));
+			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			for (int item = 0; item < Mylabels.Count; ++item)
+			{
+				Mylabels[item].Children[1].RotateTo(360, 3000);
+				Mylabels[item].Children[0].RotateTo(360, 4000);
+				Mylabels[item].Children[2].RotateTo(360, 6000);
+
+			}
 		}
 
 		private void MoveRight(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Right));
+			MoveTiles(Model.ShiftTiles(Direction.Down));
+			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			for (int item = 0; item < Mylabels.Count; ++item)
+			{
+				Mylabels[item].Children[1].RotateTo(360, 3000);
+				Mylabels[item].Children[0].RotateTo(360, 4000);
+				Mylabels[item].Children[2].RotateTo(360, 6000);
+
+			}
+		}
+
+		private void Highestscores_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new HighScoreScreen();
+		}
+
+	
+
+		private void pause_Clicked(object sender, EventArgs e)
+		{
+			//do stuff
 		}
 	}
 }
