@@ -15,6 +15,7 @@ namespace TWON.View.Pages
 	public partial class GamePage : ContentPage
 	{
 		public static Grid Model;
+		public static string SerialisedGame;
 		public List<StackLayout> Mylabels = new List<StackLayout>();
 		public GamePage()
 		{
@@ -215,8 +216,7 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				
 
 			}
 
@@ -230,8 +230,7 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				
 			}
 		}
 
@@ -243,8 +242,7 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				
 
 			}
 		}
@@ -257,8 +255,7 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				
 
 			}
 		}
@@ -272,7 +269,7 @@ namespace TWON.View.Pages
 
 		private void pause_Clicked(object sender, EventArgs e)
 		{
-			//do stuff
+			Grid.Deserialize(GamePage.SerialisedGame);
 		}
 	}
 }
