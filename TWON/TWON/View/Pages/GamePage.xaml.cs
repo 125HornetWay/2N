@@ -26,7 +26,7 @@ namespace TWON.View.Pages
 
 			Debug.WriteLine(Model.Serialize());
 			Debug.WriteLine(Model.ToString());
-
+			
 			int i = 0;  // Yes I know this is convoluted
 			foreach (Tile tile in Model.Tiles)
 			{
@@ -46,6 +46,40 @@ namespace TWON.View.Pages
 		void TimeUpdate(object sender, object value)
 		{
 			TimeLabel.Text = Model.Time.ToString("g");
+		}
+
+		public List<RowDefinition> CreateRows (int size)
+		{
+			List<RowDefinition> rows = new List<RowDefinition>();
+
+			for (int i = 0; i < size; i++)
+			{
+				RowDefinition row = new RowDefinition
+				{
+					Height = 50
+				};
+
+				rows.Add(row);
+			}
+
+			return rows;
+		}
+
+		public List<ColumnDefinition> CreateCols(int size)
+		{
+			List<ColumnDefinition> cols = new List<ColumnDefinition>();
+
+			for (int i = 0; i < size; i++)
+			{
+				ColumnDefinition col = new ColumnDefinition
+				{
+					Width = 50
+				};
+
+				cols.Add(col);
+			}
+
+			return cols;
 		}
 
 
@@ -215,8 +249,8 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				//Mylabels[item].Children[0].RotateTo(360, 4000);
+				//Mylabels[item].Children[2].RotateTo(360, 6000);
 
 			}
 
@@ -230,8 +264,8 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				//Mylabels[item].Children[0].RotateTo(360, 4000);
+				//Mylabels[item].Children[2].RotateTo(360, 6000);
 			}
 		}
 
@@ -243,8 +277,8 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				//Mylabels[item].Children[0].RotateTo(360, 4000);
+				//Mylabels[item].Children[2].RotateTo(360, 6000);
 
 			}
 		}
@@ -257,8 +291,8 @@ namespace TWON.View.Pages
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+				//Mylabels[item].Children[0].RotateTo(360, 4000);
+				//Mylabels[item].Children[2].RotateTo(360, 6000);
 
 			}
 		}
