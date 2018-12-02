@@ -56,8 +56,10 @@ namespace TWON.View.Pages
 
 
 		private void Continue_Clicked(object sender, EventArgs e)
-		{
-			Application.Current.Properties["savedgame"] = GamePage.Model.Serialize();
+		{   string SerialisedGame = GamePage.Model.Serialize();
+			GamePage.SerialisedGame = SerialisedGame;
+			Application.Current.Properties["savedgame"] = SerialisedGame;
 		}
 	}
 }
+;
