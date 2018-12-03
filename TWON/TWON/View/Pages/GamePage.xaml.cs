@@ -28,6 +28,19 @@ namespace TWON.View.Pages
 			Debug.WriteLine(Model.Serialize());
 			Debug.WriteLine(Model.ToString());
 
+			GameGrid.RowDefinitions = new RowDefinitionCollection();
+			GameGrid.ColumnDefinitions = new ColumnDefinitionCollection();
+			GameGrid.Layout(new Rectangle(280, 270, (50 * Model._columns) + (4 * Model._columns), (50 * Model._columns) + (4 * Model._columns)));
+
+			var rows = CreateRows(Model._columns);
+			var cols = CreateCols(Model._columns);
+
+			for (int j = 0; j < Model._columns; j++)
+			{
+				GameGrid.RowDefinitions.Add(rows[j]);
+				GameGrid.ColumnDefinitions.Add(cols[j]);
+			}
+
 			int i = 0;  // Yes I know this is convoluted
 			foreach (Tile tile in Model.Tiles)
 			{

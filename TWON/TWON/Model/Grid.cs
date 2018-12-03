@@ -25,7 +25,7 @@ namespace TWON
 
 		protected static CryptoRandom rand = new CryptoRandom();
 
-		private readonly int _columns;
+		public readonly int _columns;
 		private readonly int _gridSize;
 
 		public bool UpdateTimer()
