@@ -27,7 +27,7 @@ namespace TWON.View.Pages
 
 			Debug.WriteLine(Model.Serialize());
 			Debug.WriteLine(Model.ToString());
-			
+
 			int i = 0;  // Yes I know this is convoluted
 			foreach (Tile tile in Model.Tiles)
 			{
@@ -49,7 +49,7 @@ namespace TWON.View.Pages
 			TimeLabel.Text = Model.Time.ToString("g");
 		}
 
-		public List<RowDefinition> CreateRows (int size)
+		public List<RowDefinition> CreateRows(int size)
 		{
 			List<RowDefinition> rows = new List<RowDefinition>();
 
@@ -84,7 +84,7 @@ namespace TWON.View.Pages
 		}
 
 
-		public StackLayout CreateTile (int value, Color color)
+		public StackLayout CreateTile(int value, Color color)
 		{
 			var RootEl = new StackLayout();
 
@@ -153,11 +153,12 @@ namespace TWON.View.Pages
 			{
 				lbl.Text = entry.Text;
 				Model.Tiles[i].Value = Convert.ToInt32(entry.Text);
-			} catch
+			}
+			catch
 			{
 
 			}
-			
+
 
 			entry.IsVisible = false;
 			lbl.IsVisible = true;
@@ -222,7 +223,8 @@ namespace TWON.View.Pages
 					el.IsVisible = true;
 					Label lbl = (Label)el.Children[1];
 					lbl.Text = Convert.ToString(move.tile.Value);
-				} else
+				}
+				else
 				{
 					// Combination
 					Combination sMove = move as Combination;
@@ -239,7 +241,7 @@ namespace TWON.View.Pages
 					GameGrid.Children[sMove.combinedIndex].IsVisible = true;
 					GameGrid.Children[sMove.i].IsVisible = false;
 				}
-				
+
 			}
 		}
 
@@ -247,53 +249,38 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
-
-			}
+			RotatePieces();
 
 		}
 
 		private void MoveUp(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Up));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
-			}
+			RotatePieces();
+
 		}
 
 		private void MoveLeft(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Left));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
+			RotatePieces();
 
-			}
 		}
 
 		private void MoveRight(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Right));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			RotatePieces();
+		}
+
+		private void RotatePieces()
+		{
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				Mylabels[item].Children[0].RotateTo(360, 4000);
-				Mylabels[item].Children[2].RotateTo(360, 6000);
 
 			}
 		}
@@ -303,7 +290,7 @@ namespace TWON.View.Pages
 			App.Current.MainPage = new HighScoreScreen();
 		}
 
-	
+
 
 		private void pause_Clicked(object sender, EventArgs e)
 		{
