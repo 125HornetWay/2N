@@ -22,7 +22,8 @@ namespace TWON
 		protected override void OnSleep()
 		{
 			// Handle when your app sleeps
-			Application.Current.Properties["savedgame"] = GamePage.Model.Serialize();
+			if (GamePage.Model != null)
+				Application.Current.Properties["savedgame"] = GamePage.Model.Serialize();
 		
 
 		}
