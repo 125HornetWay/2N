@@ -17,11 +17,27 @@ namespace TWON.View.Pages
 		public static Grid Model;
 		public static string SerialisedGame;
 		public List<StackLayout> Mylabels = new List<StackLayout>();
-		public GamePage()
+
+		public GamePage() : this(DifficultyLevel.Easy, false) { }
+		public GamePage(DifficultyLevel dl) : this(dl, false) { }
+		public GamePage(DifficultyLevel dl, bool cm)
 		{
 			InitializeComponent();
+			int size = 4;
+			switch (dl)
+			{
+				case DifficultyLevel.Medium:
+					Model.winningScore = 4096;
+					break;
+				case DifficultyLevel.Hard:
+					size = 6;
+					Model.winningScore = 8192;
+					break;
+				default:
+					break;
+			}
 
-			Model = new Grid();
+			Model = new Grid(size, cm);
 
 			Model.PlaceTile();
 
@@ -123,7 +139,6 @@ namespace TWON.View.Pages
 			{
 				var EditBox = new Entry
 				{
-					Placeholder = Convert.ToString(value),
 					HorizontalOptions = LayoutOptions.Center,
 					VerticalOptions = LayoutOptions.Center,
 					FontSize = 20,
@@ -142,6 +157,8 @@ namespace TWON.View.Pages
 
 					root.Children[1].IsVisible = false;
 					root.Children[2].IsVisible = true;
+
+					root.Children[2].Focus();
 				});
 
 				RootEl.GestureRecognizers.Add(tap);
@@ -158,8 +175,8 @@ namespace TWON.View.Pages
 			Layout root = entry.Parent as Layout;
 			Label lbl = root.Children[1] as Label;
 
-			int x = Xamarin.Forms.Grid.GetColumn((StackLayout)root);
-			int y = Xamarin.Forms.Grid.GetRow((StackLayout)root);
+			int y = Xamarin.Forms.Grid.GetColumn((StackLayout)root);
+			int x = Xamarin.Forms.Grid.GetRow((StackLayout)root);
 			int i = Model.GetIndex(x, y);
 
 			try

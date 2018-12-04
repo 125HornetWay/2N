@@ -15,7 +15,7 @@
 			
 			<Button x:Name="Highestscores" Text="BestSCores" AbsoluteLayout.LayoutBounds="340, 100, 100, 100"  Clicked="Highestscores_Clicked"/>
 			<Button x:Name="pause" Text="Pause" AbsoluteLayout.LayoutBounds="60, 60, 40, 40"  Clicked="pause_Clicked"/>
-			<Grid x:Name="GameGrid" BackgroundColor="#a56729" Padding="5">
+			<Grid x:Name="GameGrid" BackgroundColor="#a56729" Padding="5" AbsoluteLayout.LayoutBounds="0.5, 0.6" AbsoluteLayout.LayoutFlags="PositionProportional">
 
 			</Grid>
 
