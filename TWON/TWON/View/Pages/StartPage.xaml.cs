@@ -19,7 +19,7 @@ namespace TWON.View.Pages
 			InitializeComponent ();
 			
 			var player = CrossSimpleAudioPlayer.Current;
-            player.Load("LionKing.mp3");
+            player.Load("Eternity.mp3");
             player.Play();
 
         }
@@ -52,7 +52,7 @@ namespace TWON.View.Pages
 
 		private void OnStartTapped(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new GamePage();
+			App.Current.MainPage = new GamePage("N");
 
 		}
 
@@ -60,13 +60,14 @@ namespace TWON.View.Pages
 
 		private void Continue_Clicked(object sender, EventArgs e)
 		{
-			Grid grid = Grid.Deserialize(GamePage.SerialisedGame);
+
 			//GamePage.Model.Tiles = GamePage.Model.
 			//Ap//p.Current.MainPage = new GamePage();
 
-			GamePage.Model = grid;
-			GamePage newpage = new GamePage();
-			newpage.GamePage2();
+
+			App.Current.MainPage = new GamePage("C");
+			//How do I make this to work perfectly.
+
 		}
 	}
 }

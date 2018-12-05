@@ -32,26 +32,33 @@
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<StackLayout>
-					   <Button x:Name="About" Text="About" Clicked="About_Clicked"/>
+					<StackLayout >
+					   <Button x:Name="About" Text="About" Clicked="About_Clicked" BackgroundColor="DarkGray"/>
 					</StackLayout>
 
 					<StackLayout Grid.Column="1">
-						<Button x:Name="Difficulty" Text="Difficulty" Clicked="Difficulty_Clicked"/>
+						<Button x:Name="Difficulty" Text="Difficulty" Clicked="Difficulty_Clicked" BackgroundColor ="DarkGray" InputTransparent="True"/>
 					</StackLayout>
 
 					<StackLayout Grid.Column="2">
-						<Button x:Name="Help" Text="Help" Clicked="Help_Clicked"/>
+						<Button x:Name="Help" Text="Help" Clicked="Help_Clicked" BackgroundColor="DarkGray" InputTransparent="True"/>
 					</StackLayout>
 				</Grid>
+				<StackLayout  Grid.Row="3" HorizontalOptions="Center">
+					<StackLayout   HorizontalOptions="Center">
+						<Button x:Name="Cheat"  Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked" InputTransparent="True"  BackgroundColor="DarkGray"/>
+					</StackLayout>
 
-				<!--  game gif  -->
-				<Image Grid.Row ="3" HeightRequest = "250"  Source="StartScreen.gif" />
+				<StackLayout >
+						<!--  game gif  -->
+				<Image HeightRequest = "250"  Source="StartScreen.gif" InputTransparent="True" />
 				<!--  cheat button  -->
-				<StackLayout Grid.Row="4" HorizontalOptions="Center">
-				<Button x:Name="Cheat"  Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked"/>
-				<Button x:Name="Continue" Grid.Row="4" Margin="20"  Text="Continue Game" Clicked="Continue_Clicked"/>
+					</StackLayout>
+				<StackLayout >
+
+					<Button x:Name="Continue"  Margin="20"  Text="Continue Game" Clicked="Continue_Clicked" BackgroundColor="DarkGray"/>
 				</StackLayout>
+					</StackLayout>
 			</Grid>
 		</ScrollView>
 	</ContentPage.Content>

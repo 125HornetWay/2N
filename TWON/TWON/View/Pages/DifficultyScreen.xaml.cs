@@ -19,17 +19,17 @@ namespace TWON.View.Pages
 
 		private void Level2_Clicked(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new GamePage();
+			App.Current.MainPage = new GamePage(DifficultyLevel.Medium, "N");
 		}
 
 		private void Level3_Clicked(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new GamePage();
+			App.Current.MainPage = new GamePage(DifficultyLevel.Hard, "N");
 		}
 
 		private void Level1_Clicked(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new GamePage();
+			App.Current.MainPage = new GamePage(DifficultyLevel.Easy, "N");
 		}
 
 		

@@ -5,15 +5,66 @@
                     x:Class="SkiaSharpFormsDemos.HomePage"
                     Title="SkiaSharp Forms Demos"
                     Padding="10">
-	<TableView Intent="Menu">
-		<TableRoot>
-			<TableSection>
-				<TextCell Text="SkiaSharp Drawing Basics"
-                          Detail="Learn basic graphics concepts and coordinates"
-                          Command="{Binding NavigateCommand}"
-                          CommandParameter="{x:Type local:AboutSkia2}" />
 
-			</TableSection>
-		</TableRoot>
-	</TableView>
+	<ScrollView>
+		<Grid ColumnSpacing="0" RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="AUTO" />
+				<RowDefinition Height="AUTO" />
+				<RowDefinition Height="AUTO" />
+			</Grid.RowDefinitions>
+
+			<!--  header background  -->
+			<Image  HeightRequest = "200" InputTransparent="True"     Aspect="AspectFit"  Margin="0,-1,0,-1" Source="2n.jpg" VerticalOptions="End" />
+
+			<!--  start game image  -->
+			<Image x:Name ="StartImage" HeightRequest="100" HorizontalOptions="Center" Source="2N_Start_Button.gif" TranslationY="50" VerticalOptions="End" WidthRequest="100">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnStartTapped" NumberOfTapsRequired="1" />
+				</Image.GestureRecognizers>
+			</Image>
+
+
+
+			<!--  About, difficulty and help buttons  -->
+			<Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<StackLayout >
+					<Button x:Name="About" Text="About" BackgroundColor="DarkGray"
+							Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:AboutSkia2}"  />
+				</StackLayout>
+
+				<StackLayout Grid.Column="1">
+					<Button x:Name="Difficulty" Text="Difficulty" Clicked="Difficulty_Clicked" BackgroundColor="DarkBlue"  InputTransparent="True"/>
+				</StackLayout>
+
+				<StackLayout Grid.Column="2">
+					<Button x:Name="Help" Text="Help" Clicked="Help_Clicked" BackgroundColor="DarkGray" InputTransparent="True"/>
+				</StackLayout>
+			</Grid>
+			<StackLayout  Grid.Row="3" HorizontalOptions="Center">
+				<StackLayout   HorizontalOptions="Center">
+					<Button x:Name="Cheat"  Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked" InputTransparent="True"  BackgroundColor="DarkGray"/>
+				</StackLayout>
+
+				<StackLayout >
+					<!--  game gif  -->
+					<Image HeightRequest = "250"  Source="StartScreen.gif" InputTransparent="True" />
+					<!--  cheat button  -->
+				</StackLayout>
+				<StackLayout >
+
+					<Button x:Name="Continue"  Margin="20"  Text="Continue Game" Clicked="Continue_Clicked" BackgroundColor="DarkGray"/>
+				</StackLayout>
+			</StackLayout>
+		</Grid>
+	</ScrollView>
 </local:HomeBasePage>
+
+

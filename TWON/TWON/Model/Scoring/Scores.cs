@@ -7,7 +7,9 @@ namespace TWON.Model
 
 	class Scores
 	{
-		static int Score = 0;
+		public static int Score = 0;
+
+		public static int SavedScore = 0;
 		public Scores()
 		{
 

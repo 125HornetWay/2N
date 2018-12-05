@@ -18,9 +18,92 @@ namespace TWON.View.Pages
 		public static string SerialisedGame;
 		public List<StackLayout> Mylabels = new List<StackLayout>();
 
-		public GamePage() : this(DifficultyLevel.Easy, false) { }
-		public GamePage(DifficultyLevel dl) : this(dl, false) { }
-		public GamePage(DifficultyLevel dl, bool cm)
+		public GamePage(string N) : this(DifficultyLevel.Easy, false, N) { }
+
+	
+		public GamePage(DifficultyLevel dl, string N) : this(dl, false, N ) { }
+		public GamePage(DifficultyLevel dl, bool cm, string N)
+		{
+
+			InitializeComponent();
+			int size = 4;
+			switch (dl)
+			{
+				case DifficultyLevel.Medium:
+					Model.winningScore = 4096;
+					break;
+				case DifficultyLevel.Hard:
+					size = 6;
+					Model.winningScore = 8192;
+					break;
+				default:
+					break;
+			}
+
+			Model = new Grid(size, cm);
+
+			Model.PlaceTile();
+
+			Debug.WriteLine(Model.Serialize());
+			Debug.WriteLine(Model.ToString());
+
+			GameGrid.RowDefinitions = new RowDefinitionCollection();
+			GameGrid.ColumnDefinitions = new ColumnDefinitionCollection();
+			GameGrid.Layout(new Rectangle(280, 270, (50 * Model._columns) + (4 * Model._columns), (50 * Model._columns) + (4 * Model._columns)));
+
+			var rows = CreateRows(Model._columns);
+			var cols = CreateCols(Model._columns);
+
+			for (int j = 0; j < Model._columns; j++)
+			{
+				GameGrid.RowDefinitions.Add(rows[j]);
+				GameGrid.ColumnDefinitions.Add(cols[j]);
+			}
+
+			int i = 0;  // Yes I know this is convoluted
+
+			if (N == "N")
+			{
+				foreach (Tile tile in Model.Tiles)
+				{
+					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+					if (tile.Value == 0) TileElement.IsVisible = false;
+					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+					Mylabels.Add(TileElement);
+					i++;
+				}
+
+				Scores.Score = 0;
+
+			}
+			else if (N == "C")
+			{
+
+				foreach (Tile tile in Grid.SavedGrid)
+				{
+					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+					if (tile.Value == 0) TileElement.IsVisible = false;
+					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+					Mylabels.Add(TileElement);
+					i++;
+				}
+
+				Scores.Score = Scores.SavedScore;
+				ScoreLabel.Text = Scores.Score.ToString();
+				Model.Tiles = Grid.SavedGrid;
+
+			}
+
+			Device.StartTimer(TimeSpan.FromSeconds(1), Model.UpdateTimer);
+
+			Model.UpdateTimeEvent += TimeUpdate;
+
+		}
+
+		//The new constructor needs to set the saved game scores.
+		//The new constructor needs to set the game tiles to the previous stiles provided.
+		
+		public void GamePage2(DifficultyLevel dl, bool cm, string N)
 		{
 			InitializeComponent();
 			int size = 4;
@@ -58,13 +141,29 @@ namespace TWON.View.Pages
 			}
 
 			int i = 0;  // Yes I know this is convoluted
-			foreach (Tile tile in Model.Tiles)
+
+			if (N == "N")
 			{
-				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
-				if (tile.Value == 0) TileElement.IsVisible = false;
-				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
-				Mylabels.Add(TileElement);
-				i++;
+				foreach (Tile tile in Model.Tiles)
+				{
+					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+					if (tile.Value == 0) TileElement.IsVisible = false;
+					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+					Mylabels.Add(TileElement);
+					i++;
+				}
+
+			}
+			else if (N == "C") {
+
+				foreach (Tile tile in Grid.SavedGrid)
+				{
+					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+					if (tile.Value == 0) TileElement.IsVisible = false;
+					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+					Mylabels.Add(TileElement);
+					i++;
+				}
 			}
 
 			Device.StartTimer(TimeSpan.FromSeconds(1), Model.UpdateTimer);
@@ -73,34 +172,7 @@ namespace TWON.View.Pages
 
 		}
 
-		//The new constructor needs to set the saved game scores.
-		//The new constructor needs to set the game tiles to the previous stiles provided.
-		
-		public void GamePage2()
-		{
-			InitializeComponent();
 
-			Model = new Grid();
-
-			Model.PlaceTile();
-
-			Debug.WriteLine(Model.Serialize());
-			Debug.WriteLine(Model.ToString());
-
-			int i = 0;  // Yes I know this is convoluted
-			foreach (Tile tile in Grid.SavedGrid)
-			{
-				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
-				if (tile.Value == 0) TileElement.IsVisible = false;
-				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
-				Mylabels.Add(TileElement);
-				i++;
-			}
-
-			Device.StartTimer(TimeSpan.FromSeconds(1), Model.UpdateTimer);
-
-			Model.UpdateTimeEvent += TimeUpdate;
-		}
 
 		void TimeUpdate(object sender, object value)
 		{
@@ -337,9 +409,10 @@ namespace TWON.View.Pages
 
 		private void RotatePieces()
 		{
-			for (int item = 0; item < Mylabels.Count; ++item)
+			foreach (int item in TWON.Model.Animation.currentcombinations)
 			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
+				Mylabels[item].Children[1].RotateTo(360, 200);
+				Mylabels[item].Children[1].ScaleTo(2, 2000);
 
 			}
 		}
@@ -358,6 +431,7 @@ namespace TWON.View.Pages
 			GamePage.SerialisedGame = SerialisedGame;
 			Grid.SavedGrid = Model.Tiles;
 			Application.Current.Properties["savedgame"] = SerialisedGame;
+			Scores.SavedScore = Scores.Score;
 
 			//There should be a way to save the tiles off so that when the games starts, You just grabe the saved tiles.
 		}

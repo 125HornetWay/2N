@@ -106,6 +106,7 @@
     <Content Include="2n.jpg" />
     <Content Include="blueprint-16-9.jpg" />
     <Content Include="blueprint.jpg" />
+    <EmbeddedResource Include="Eternity.mp3" />
     <Content Include="new.jpg" />
     <Content Include="image2.jpg" />
     <Content Include="Assets\LionKing.mp3" />
