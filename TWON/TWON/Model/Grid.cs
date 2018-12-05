@@ -18,6 +18,7 @@ namespace TWON
 		public Tile[] Tiles { get; set; }
 		public bool GameOver = false;
 		public bool cheatMode = false;
+		public static Tile[] SavedGrid;
 
 		public int winningScore = 2048;
 
@@ -72,6 +73,7 @@ namespace TWON
 			}
 
 			return grid;
+			
 		}
 
 		public Grid(int size)

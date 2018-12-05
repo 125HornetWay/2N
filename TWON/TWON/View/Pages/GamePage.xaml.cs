@@ -44,6 +44,35 @@ namespace TWON.View.Pages
 
 		}
 
+		//The new constructor needs to set the saved game scores.
+		//The new constructor needs to set the game tiles to the previous stiles provided.
+		
+		public void GamePage2()
+		{
+			InitializeComponent();
+
+			Model = new Grid();
+
+			Model.PlaceTile();
+
+			Debug.WriteLine(Model.Serialize());
+			Debug.WriteLine(Model.ToString());
+
+			int i = 0;  // Yes I know this is convoluted
+			foreach (Tile tile in Grid.SavedGrid)
+			{
+				StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
+				if (tile.Value == 0) TileElement.IsVisible = false;
+				GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
+				Mylabels.Add(TileElement);
+				i++;
+			}
+
+			Device.StartTimer(TimeSpan.FromSeconds(1), Model.UpdateTimer);
+
+			Model.UpdateTimeEvent += TimeUpdate;
+		}
+
 		void TimeUpdate(object sender, object value)
 		{
 			TimeLabel.Text = Model.Time.ToString("g");
@@ -93,7 +122,7 @@ namespace TWON.View.Pages
 				{
 					StackLayout root = sender as StackLayout;
 
-					root.Children[1].IsVisible = false;
+					root.Children[1].IsVisible = true;
 					root.Children[2].IsVisible = true;
 				});
 
@@ -269,7 +298,13 @@ namespace TWON.View.Pages
 
 		private void pause_Clicked(object sender, EventArgs e)
 		{
-			Grid.Deserialize(GamePage.SerialisedGame);
+			
+			string SerialisedGame = GamePage.Model.Serialize();
+			GamePage.SerialisedGame = SerialisedGame;
+			Grid.SavedGrid = Model.Tiles;
+			Application.Current.Properties["savedgame"] = SerialisedGame;
+
+			//There should be a way to save the tiles off so that when the games starts, You just grabe the saved tiles.
 		}
 	}
 }

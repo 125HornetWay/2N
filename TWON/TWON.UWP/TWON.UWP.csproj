@@ -103,7 +103,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="2n.jpg" />
+    <Content Include="blueprint-16-9.jpg" />
+    <Content Include="blueprint.jpg" />
+    <Content Include="new.jpg" />
+    <Content Include="image2.jpg" />
     <Content Include="Assets\LionKing.mp3" />
+    <Content Include="background2.jpg" />
+    <Content Include="images.jpg" />
     <Content Include="LionKing.mp3" />
     <Content Include="2N.png" />
     <Content Include="2N_Start_Button.gif" />
@@ -137,15 +144,21 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="contentBackground.jpg" />
     <Content Include="background.png" />
+    <Content Include="Numbers.jpg" />
     <Content Include="tile.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="StartScreen.gif" />
+    <Content Include="Vector-Abstract-Technology-Background-with-3D-Squares-07.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AboutSkia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

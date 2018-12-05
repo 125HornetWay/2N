@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TWON.View.Pages.StartPage"
-			 BackgroundImage="contentBackground.jpg">
-    <ContentPage.Content >
+			 BackgroundImage="blueprint.jpg">
+	<ContentPage.Content >
 		<ScrollView>
 			<Grid ColumnSpacing="0" RowSpacing="0">
 				<Grid.RowDefinitions>
@@ -11,9 +11,9 @@
 					<RowDefinition Height="AUTO" />
 					<RowDefinition Height="AUTO" />
 					</Grid.RowDefinitions>
-
+  
 				<!--  header background  -->
-				<Image  HeightRequest = "200" Aspect="Fill" Margin="0,-1,0,-1" Source="2N.png" VerticalOptions="End" />
+				<Image  HeightRequest = "200" InputTransparent="True"     Aspect="AspectFit"  Margin="0,-1,0,-1" Source="2n.jpg" VerticalOptions="End" />
 
 				<!--  start game image  -->
 				<Image x:Name ="StartImage" HeightRequest="100" HorizontalOptions="Center" Source="2N_Start_Button.gif" TranslationY="50" VerticalOptions="End" WidthRequest="100">
@@ -48,9 +48,10 @@
 				<!--  game gif  -->
 				<Image Grid.Row ="3" HeightRequest = "250"  Source="StartScreen.gif" />
 				<!--  cheat button  -->
-				<Button x:Name="Cheat" Grid.Row="4" Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked"/>
+				<StackLayout Grid.Row="4" HorizontalOptions="Center">
+				<Button x:Name="Cheat"  Margin="20"  Text="Cheat Mode " Clicked="Cheat_Clicked"/>
 				<Button x:Name="Continue" Grid.Row="4" Margin="20"  Text="Continue Game" Clicked="Continue_Clicked"/>
-
+				</StackLayout>
 			</Grid>
 		</ScrollView>
 	</ContentPage.Content>

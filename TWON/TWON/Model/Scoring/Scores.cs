@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TWON
+namespace TWON.Model
 {
-    class Scores
-    {
+
+	class Scores
+	{
 		static int Score = 0;
 		public Scores()
 		{
@@ -25,5 +26,5 @@ namespace TWON
 			return Score;
 		}
 
-    }
+	}
 }
