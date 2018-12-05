@@ -3,6 +3,9 @@ using Plugin.SimpleAudioPlayer;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SkiaSharpFormsDemos;
+
+using TWON.View.Pages;
 
 namespace TWON.View.Pages
 {
@@ -24,7 +27,7 @@ namespace TWON.View.Pages
 		
 		private void About_Clicked(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new AboutScreen();
+			App.Current.MainPage = new NavigationPage(new HomePage());
 
 		}
 
@@ -56,9 +59,14 @@ namespace TWON.View.Pages
 
 
 		private void Continue_Clicked(object sender, EventArgs e)
-		{   string SerialisedGame = GamePage.Model.Serialize();
-			GamePage.SerialisedGame = SerialisedGame;
-			Application.Current.Properties["savedgame"] = SerialisedGame;
+		{
+			Grid grid = Grid.Deserialize(GamePage.SerialisedGame);
+			//GamePage.Model.Tiles = GamePage.Model.
+			//Ap//p.Current.MainPage = new GamePage();
+
+			GamePage.Model = grid;
+			GamePage newpage = new GamePage();
+			newpage.GamePage2();
 		}
 	}
 }

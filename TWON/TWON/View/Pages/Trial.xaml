@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:HomeBasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:local="clr-namespace:SkiaSharpFormsDemos"
+                    x:Class="SkiaSharpFormsDemos.HomePage"
+                    Title="SkiaSharp Forms Demos"
+                    Padding="10">
+	<TableView Intent="Menu">
+		<TableRoot>
+			<TableSection>
+				<TextCell Text="SkiaSharp Drawing Basics"
+                          Detail="Learn basic graphics concepts and coordinates"
+                          Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:AboutSkia2}" />
+
+			</TableSection>
+		</TableRoot>
+	</TableView>
+</local:HomeBasePage>

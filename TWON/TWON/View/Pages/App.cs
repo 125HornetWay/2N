@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using TWON.View.Pages;
+using SkiaSharp;
 using TWON;
+using SkiaSharpFormsDemos;
 
 namespace TWON
 {
@@ -11,7 +13,7 @@ namespace TWON
 	{
 		public App()
 		{
-			MainPage = new StartPage();
+			MainPage = new NavigationPage(new StartPage());
 		}
 
 		protected override void OnStart()
