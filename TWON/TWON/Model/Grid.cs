@@ -12,6 +12,11 @@ namespace TWON
 		Up, Down, Left, Right
 	}
 
+	public enum DifficultyLevel
+	{
+		Easy, Medium, Hard
+	}
+
 	public class Grid
 	{
 		public EventHandler<object> UpdateTimeEvent;
@@ -26,7 +31,7 @@ namespace TWON
 
 		protected static CryptoRandom rand = new CryptoRandom();
 
-		private readonly int _columns;
+		public readonly int _columns;
 		private readonly int _gridSize;
 
 		public bool UpdateTimer()
@@ -266,42 +271,44 @@ namespace TWON
 		public List<Move> ShiftTiles(Direction dir)
 		{
 			List<Move> moves = new List<Move>();
-			if (dir == Direction.Down || dir == Direction.Right)
+			if (!GameOver)
 			{
-				// Count i down
-				for (int i = _gridSize - 1; i >= 0; --i)
+				if (dir == Direction.Down || dir == Direction.Right)
 				{
-					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+					// Count i down
+					for (int i = _gridSize - 1; i >= 0; --i)
 					{
-						Move move = MoveTile(i, dir);
-						if (move != null)
-							moves.Add(move);
+						if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+						{
+							Move move = MoveTile(i, dir);
+							if (move != null)
+								moves.Add(move);
+						}
 					}
 				}
-			} else
-			{
-				// Count i up
-				for (int i = 0; i < _gridSize; ++i)
+				else
 				{
-					if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+					// Count i up
+					for (int i = 0; i < _gridSize; ++i)
 					{
-						Move move = MoveTile(i, dir);
-						if (move != null)
-							moves.Add(move);
+						if (GetDirections()[i].Contains(dir) && Tiles[i].Value > 0)
+						{
+							Move move = MoveTile(i, dir);
+							if (move != null)
+								moves.Add(move);
+						}
 					}
 				}
-			}
 
-			if (moves.Count > 0)
-			{
-				int newTile = PlaceTile();
-				moves.Add(new Spawn(newTile, Tiles[newTile]));
-			}
-
-
-			if ((Tiles.All(tile => tile.Value > 0) && moves.Count == 0) || Tiles.Any(tile => tile.Value == winningScore))
-			{
-				GameOver = true;
+				if ((Tiles.All(tile => tile.Value > 0) && moves.Count == 0) || Tiles.Any(tile => tile.Value == winningScore))
+				{
+					GameOver = true;
+				}
+				else if (moves.Count > 0)
+				{
+					int newTile = PlaceTile();
+					moves.Add(new Spawn(newTile, Tiles[newTile]));
+				}
 			}
 
 			return moves;

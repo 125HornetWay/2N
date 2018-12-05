@@ -115,3 +115,56 @@ Total: 18.49
 Time Remaining: 39:11
 
 https://github.com/125HornetWay/2N/wiki/Dorcas'-Journal
+
+# 2N (Release candidate)
+Customized 2048 clone
+
+## Instructions
+
+ 
+
+### Note:
+The game's background audio is alittle louder than my voice in the video but still audible.
+Most of the implementation in this phase works somewhat, but not as expected.  
+
+## Work completed
+
+* Sound effects
+* Animation
+* Difficulties
+* Cheat Mode
+* Game Save/Load
+
+
+## Known Issues
+
+*There is no back button on the highscores screen
+*Animations work just once
+*The Game save/Load Logic is not functioning as expected yet. 
+
+## Demo
+https://youtu.be/fPbfPROkZzc
+## Expenses
+
+### Matthew Miller
+| Date | Task | Time Spent|
+|------|------|-----------|
+| **Beta** | | **?** |
+
+
+Total: ??
+Time Remaining: ??
+
+https://github.com/125HornetWay/2N/wiki/Matthew's-Journal
+
+## Dorcas Lanyero
+
+| Date | Task | Time Spent|
+|------|------|-----------|
+| **Beta** | | **19.45** |
+
+
+Total: 37.94
+Time Remaining: 19:66
+
+https://github.com/125HornetWay/2N/wiki/Dorcas'-Journal

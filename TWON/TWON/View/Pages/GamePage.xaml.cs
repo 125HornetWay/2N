@@ -17,16 +17,45 @@ namespace TWON.View.Pages
 		public static Grid Model;
 		public static string SerialisedGame;
 		public List<StackLayout> Mylabels = new List<StackLayout>();
-		public GamePage()
+
+		public GamePage() : this(DifficultyLevel.Easy, false) { }
+		public GamePage(DifficultyLevel dl) : this(dl, false) { }
+		public GamePage(DifficultyLevel dl, bool cm)
 		{
 			InitializeComponent();
+			int size = 4;
+			switch (dl)
+			{
+				case DifficultyLevel.Medium:
+					Model.winningScore = 4096;
+					break;
+				case DifficultyLevel.Hard:
+					size = 6;
+					Model.winningScore = 8192;
+					break;
+				default:
+					break;
+			}
 
-			Model = new Grid();
+			Model = new Grid(size, cm);
 
 			Model.PlaceTile();
 
 			Debug.WriteLine(Model.Serialize());
 			Debug.WriteLine(Model.ToString());
+
+			GameGrid.RowDefinitions = new RowDefinitionCollection();
+			GameGrid.ColumnDefinitions = new ColumnDefinitionCollection();
+			GameGrid.Layout(new Rectangle(280, 270, (50 * Model._columns) + (4 * Model._columns), (50 * Model._columns) + (4 * Model._columns)));
+
+			var rows = CreateRows(Model._columns);
+			var cols = CreateCols(Model._columns);
+
+			for (int j = 0; j < Model._columns; j++)
+			{
+				GameGrid.RowDefinitions.Add(rows[j]);
+				GameGrid.ColumnDefinitions.Add(cols[j]);
+			}
 
 			int i = 0;  // Yes I know this is convoluted
 			foreach (Tile tile in Model.Tiles)
@@ -78,8 +107,42 @@ namespace TWON.View.Pages
 			TimeLabel.Text = Model.Time.ToString("g");
 		}
 
+		public List<RowDefinition> CreateRows(int size)
+		{
+			List<RowDefinition> rows = new List<RowDefinition>();
 
-		public StackLayout CreateTile (int value, Color color)
+			for (int i = 0; i < size; i++)
+			{
+				RowDefinition row = new RowDefinition
+				{
+					Height = 50
+				};
+
+				rows.Add(row);
+			}
+
+			return rows;
+		}
+
+		public List<ColumnDefinition> CreateCols(int size)
+		{
+			List<ColumnDefinition> cols = new List<ColumnDefinition>();
+
+			for (int i = 0; i < size; i++)
+			{
+				ColumnDefinition col = new ColumnDefinition
+				{
+					Width = 50
+				};
+
+				cols.Add(col);
+			}
+
+			return cols;
+		}
+
+
+		public StackLayout CreateTile(int value, Color color)
 		{
 			var RootEl = new StackLayout();
 
@@ -105,7 +168,6 @@ namespace TWON.View.Pages
 			{
 				var EditBox = new Entry
 				{
-					Placeholder = Convert.ToString(value),
 					HorizontalOptions = LayoutOptions.Center,
 					VerticalOptions = LayoutOptions.Center,
 					FontSize = 20,
@@ -124,6 +186,8 @@ namespace TWON.View.Pages
 
 					root.Children[1].IsVisible = true;
 					root.Children[2].IsVisible = true;
+
+					root.Children[2].Focus();
 				});
 
 				RootEl.GestureRecognizers.Add(tap);
@@ -140,19 +204,20 @@ namespace TWON.View.Pages
 			Layout root = entry.Parent as Layout;
 			Label lbl = root.Children[1] as Label;
 
-			int x = Xamarin.Forms.Grid.GetColumn((StackLayout)root);
-			int y = Xamarin.Forms.Grid.GetRow((StackLayout)root);
+			int y = Xamarin.Forms.Grid.GetColumn((StackLayout)root);
+			int x = Xamarin.Forms.Grid.GetRow((StackLayout)root);
 			int i = Model.GetIndex(x, y);
 
 			try
 			{
 				lbl.Text = entry.Text;
 				Model.Tiles[i].Value = Convert.ToInt32(entry.Text);
-			} catch
+			}
+			catch
 			{
 
 			}
-			
+
 
 			entry.IsVisible = false;
 			lbl.IsVisible = true;
@@ -217,7 +282,8 @@ namespace TWON.View.Pages
 					el.IsVisible = true;
 					Label lbl = (Label)el.Children[1];
 					lbl.Text = Convert.ToString(move.tile.Value);
-				} else
+				}
+				else
 				{
 					// Combination
 					Combination sMove = move as Combination;
@@ -234,7 +300,7 @@ namespace TWON.View.Pages
 					GameGrid.Children[sMove.combinedIndex].IsVisible = true;
 					GameGrid.Children[sMove.i].IsVisible = false;
 				}
-				
+
 			}
 		}
 
@@ -242,49 +308,38 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				
-
-			}
+			RotatePieces();
 
 		}
 
 		private void MoveUp(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Up));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				
-			}
+			RotatePieces();
+
 		}
 
 		private void MoveLeft(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Left));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
-			for (int item = 0; item < Mylabels.Count; ++item)
-			{
-				Mylabels[item].Children[1].RotateTo(360, 3000);
-				
+			RotatePieces();
 
-			}
 		}
 
 		private void MoveRight(object sender, EventArgs e)
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Right));
-			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			RotatePieces();
+		}
+
+		private void RotatePieces()
+		{
 			for (int item = 0; item < Mylabels.Count; ++item)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 3000);
-				
 
 			}
 		}
@@ -294,7 +349,7 @@ namespace TWON.View.Pages
 			App.Current.MainPage = new HighScoreScreen();
 		}
 
-	
+
 
 		private void pause_Clicked(object sender, EventArgs e)
 		{
