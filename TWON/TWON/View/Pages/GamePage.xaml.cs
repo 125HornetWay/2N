@@ -9,6 +9,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TWON.View;
 
+using Plugin.SimpleAudioPlayer;
+using System.IO;
+using System.Reflection;
 
 namespace TWON.View.Pages
 {
@@ -19,14 +22,26 @@ namespace TWON.View.Pages
 		public static string SerialisedGame;
 		public List<StackLayout> Mylabels = new List<StackLayout>();
 
-		public GamePage(string N) : this(DifficultyLevel.Easy, false, N) { }
+		private ISimpleAudioPlayer player;
 
-	
+		Stream GetStreamFromFile(string filename)
+		{
+			var assembly = typeof(App).GetTypeInfo().Assembly;
+			var stream = assembly.GetManifestResourceStream("TWON." + filename);
+			return stream;
+		}
+
+		public GamePage(string N) : this(DifficultyLevel.Easy, false, N) { }
 		public GamePage(DifficultyLevel dl, string N) : this(dl, false, N ) { }
 		public GamePage(DifficultyLevel dl, bool cm, string N)
 		{
 
 			InitializeComponent();
+
+			//player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+			//player.Load("swoosh.mp3");
+
+
 			int size = 4;
 			switch (dl)
 			{
@@ -50,7 +65,7 @@ namespace TWON.View.Pages
 
 			GameGrid.RowDefinitions = new RowDefinitionCollection();
 			GameGrid.ColumnDefinitions = new ColumnDefinitionCollection();
-			GameGrid.Layout(new Rectangle(280, 270, (50 * Model._columns) + (4 * Model._columns), (50 * Model._columns) + (4 * Model._columns)));
+			GameGrid.Layout(new Rectangle(280, 270, (100 * Model._columns) + (8 * Model._columns), (100 * Model._columns) + (8 * Model._columns)));
 
 			var rows = CreateRows(Model._columns);
 			var cols = CreateCols(Model._columns);
@@ -103,75 +118,6 @@ namespace TWON.View.Pages
 
 		//The new constructor needs to set the saved game scores.
 		//The new constructor needs to set the game tiles to the previous stiles provided.
-		
-		public void GamePage2(DifficultyLevel dl, bool cm, string N)
-		{
-			InitializeComponent();
-			int size = 4;
-			switch (dl)
-			{
-				case DifficultyLevel.Medium:
-					Model.winningScore = 4096;
-					break;
-				case DifficultyLevel.Hard:
-					size = 6;
-					Model.winningScore = 8192;
-					break;
-				default:
-					break;
-			}
-
-			Model = new Grid(size, cm);
-
-			Model.PlaceTile();
-
-			Debug.WriteLine(Model.Serialize());
-			Debug.WriteLine(Model.ToString());
-
-			GameGrid.RowDefinitions = new RowDefinitionCollection();
-			GameGrid.ColumnDefinitions = new ColumnDefinitionCollection();
-			GameGrid.Layout(new Rectangle(280, 270, (50 * Model._columns) + (4 * Model._columns), (50 * Model._columns) + (4 * Model._columns)));
-
-			var rows = CreateRows(Model._columns);
-			var cols = CreateCols(Model._columns);
-
-			for (int j = 0; j < Model._columns; j++)
-			{
-				GameGrid.RowDefinitions.Add(rows[j]);
-				GameGrid.ColumnDefinitions.Add(cols[j]);
-			}
-
-			int i = 0;  // Yes I know this is convoluted
-
-			if (N == "N")
-			{
-				foreach (Tile tile in Model.Tiles)
-				{
-					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
-					if (tile.Value == 0) TileElement.IsVisible = false;
-					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
-					Mylabels.Add(TileElement);
-					i++;
-				}
-
-			}
-			else if (N == "C") {
-
-				foreach (Tile tile in Grid.SavedGrid)
-				{
-					StackLayout TileElement = CreateTile(tile.Value, tile.GetColor());
-					if (tile.Value == 0) TileElement.IsVisible = false;
-					GameGrid.Children.Add(TileElement, Model.GetColumn(i), Model.GetRow(i));
-					Mylabels.Add(TileElement);
-					i++;
-				}
-			}
-
-			Device.StartTimer(TimeSpan.FromSeconds(1), Model.UpdateTimer);
-
-			Model.UpdateTimeEvent += TimeUpdate;
-
-		}
 
 
 
@@ -188,7 +134,7 @@ namespace TWON.View.Pages
 			{
 				RowDefinition row = new RowDefinition
 				{
-					Height = 50
+					Height = 100
 				};
 
 				rows.Add(row);
@@ -205,7 +151,7 @@ namespace TWON.View.Pages
 			{
 				ColumnDefinition col = new ColumnDefinition
 				{
-					Width = 50
+					Width = 100
 				};
 
 				cols.Add(col);
@@ -221,8 +167,8 @@ namespace TWON.View.Pages
 
 			var Background = new BoxView();
 
-			Background.WidthRequest = 50;
-			Background.HeightRequest = 50;
+			Background.WidthRequest = 100;
+			Background.HeightRequest = 100;
 			Background.BackgroundColor = color;
 
 			var label = new Label
@@ -230,8 +176,8 @@ namespace TWON.View.Pages
 				Text = Convert.ToString(value),
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center,
-				FontSize = 20,
-				TranslationY = -45
+				FontSize = 40,
+				TranslationY = -85
 			};
 
 			RootEl.Children.Add(Background);
@@ -381,10 +327,11 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			//player.Play();
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				//HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -395,10 +342,11 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Up));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			//player.Play();
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				//HighScore.CheckIfHighScore( , Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -409,13 +357,15 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Left));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+			//player.Play();
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				//HighScore.CheckIfHighScore(pause.Text, Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
+		
 
 		}
 
@@ -427,7 +377,7 @@ namespace TWON.View.Pages
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				//HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -447,7 +397,7 @@ namespace TWON.View.Pages
 
 		private void Highestscores_Clicked(object sender, EventArgs e)
 		{
-			HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+			//HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 			HightScoreCollection.Save();
 			App.Current.MainPage = new HighScoreScreen();
 			

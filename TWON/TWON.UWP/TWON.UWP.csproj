@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="2n.jpg" />
+    <Content Include="Assets\swoosh.mp3" />
     <Content Include="blueprint-16-9.jpg" />
     <Content Include="blueprint.jpg" />
     <EmbeddedResource Include="Eternity.mp3" />
