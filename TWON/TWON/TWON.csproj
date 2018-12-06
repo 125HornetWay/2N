@@ -16,11 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="View\Pages\Eternity.mp3" />
     <None Remove="View\Pages\LionKing.mp3" />
     <None Remove="View\Pages\swoosh.mp3" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="View\Pages\Eternity.mp3" />
     <EmbeddedResource Include="View\Pages\LionKing.mp3" />
     <EmbeddedResource Include="View\Pages\swoosh.mp3" />
   </ItemGroup>

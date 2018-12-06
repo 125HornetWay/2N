@@ -33,21 +33,21 @@ namespace TWON.Model
 			//sort list by scores
 		}
 
-		public void Save(List<HighScore> HighScores)
+		public static void Save()
 		{
-			int count = 1;
-			foreach (HighScore score in HighScores)
+			
+			foreach (HighScore score in  HighScores)
 			{
-				string data = count.ToString() + ' ' + score.Name + ' ' + score.Score;
+				string data = score.Name + ' ' + score.Score;
 				using (StreamWriter writer = new StreamWriter("HighScores.txt"))
 				{
 					writer.WriteLine(data);
 				}
-				++count;
+				
 			}
 		}
 
-		public List<string> Load()
+		public static List<string> Load()
 		{
 			List<string> HighScoreData = new List<string>();
 			string line = "nothing yet";

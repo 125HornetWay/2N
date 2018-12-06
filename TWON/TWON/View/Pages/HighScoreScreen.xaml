@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TWON.View.HighScoreScreen">
+             x:Class="TWON.View.HighScoreScreen"
+			 BackgroundImage="lines.jpg">
     <ContentPage.Content>
 		<ScrollView>
 			<Grid ColumnSpacing="0" RowSpacing="0">
@@ -18,7 +19,7 @@
 					</Grid.ColumnDefinitions>
 
 					<StackLayout>
-						<Image  HeightRequest = "200"  Source="2N.png" />
+						<Image  HeightRequest = "200"  Source="2n.jpg" />
 					</StackLayout>
 
 					<StackLayout Grid.Column="2">

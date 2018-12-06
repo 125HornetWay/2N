@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TWON.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TWON.View;
 
 
 namespace TWON.View.Pages
@@ -381,6 +382,12 @@ namespace TWON.View.Pages
 			MoveTiles(Model.ShiftTiles(Direction.Down));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
 			RotatePieces();
+			if (Model.GameOver)
+			{
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				HightScoreCollection.Save();
+				App.Current.MainPage = new HighScoreScreen();
+			}
 
 		}
 
@@ -389,6 +396,12 @@ namespace TWON.View.Pages
 			MoveTiles(Model.ShiftTiles(Direction.Up));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
 			RotatePieces();
+			if (Model.GameOver)
+			{
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				HightScoreCollection.Save();
+				App.Current.MainPage = new HighScoreScreen();
+			}
 
 		}
 
@@ -397,6 +410,12 @@ namespace TWON.View.Pages
 			MoveTiles(Model.ShiftTiles(Direction.Left));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
 			RotatePieces();
+			if (Model.GameOver)
+			{
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				HightScoreCollection.Save();
+				App.Current.MainPage = new HighScoreScreen();
+			}
 
 		}
 
@@ -404,7 +423,14 @@ namespace TWON.View.Pages
 		{
 			MoveTiles(Model.ShiftTiles(Direction.Right));
 			ScoreLabel.Text = Convert.ToString(Scores.GetScore());
+
 			RotatePieces();
+			if (Model.GameOver)
+			{
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				HightScoreCollection.Save();
+				App.Current.MainPage = new HighScoreScreen();
+			}
 		}
 
 		private void RotatePieces()
@@ -412,18 +438,22 @@ namespace TWON.View.Pages
 			foreach (int item in TWON.Model.Animation.currentcombinations)
 			{
 				Mylabels[item].Children[1].RotateTo(360, 200);
-				Mylabels[item].Children[1].ScaleTo(2, 2000);
+				Mylabels[item].Children[0].RotateTo(360, 200);
+
 
 			}
+			
 		}
 
 		private void Highestscores_Clicked(object sender, EventArgs e)
 		{
+			HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+			HightScoreCollection.Save();
 			App.Current.MainPage = new HighScoreScreen();
+			
+				
+			
 		}
-
-
-
 		private void pause_Clicked(object sender, EventArgs e)
 		{
 			

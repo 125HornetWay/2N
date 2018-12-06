@@ -303,6 +303,7 @@ namespace TWON
 				if ((Tiles.All(tile => tile.Value > 0) && moves.Count == 0) || Tiles.Any(tile => tile.Value == winningScore))
 				{
 					GameOver = true;
+					
 				}
 				else if (moves.Count > 0)
 				{

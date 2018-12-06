@@ -19,7 +19,7 @@ namespace TWON
 		}
 
 		//Checks if player's score is a highscore.
-		public bool CheckIfHighScore(string RecievedName, int RecievedScore)
+		public static bool CheckIfHighScore(string RecievedName, int RecievedScore)
 		{
 			bool High = false;
 			int Counter = 0;
@@ -52,7 +52,7 @@ namespace TWON
 		//Returns all the high scores and correspoinding player names from a file
 		
 		//Returns the best score from a file to be displayed on the leader board. 
-		public string SetBestScore(int NewScore)
+		public static string SetBestScore(int NewScore)
 		{
 			if (NewScore > CurrentHighestScore)
 			{
