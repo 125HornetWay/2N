@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TWON.Model
 {
+	// Represent a new tile
     class Spawn : Move
     {
 		public Spawn (int i, Tile tile)

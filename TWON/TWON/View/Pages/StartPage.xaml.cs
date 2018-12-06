@@ -47,12 +47,12 @@ namespace TWON.View.Pages
 		{
 			//Implemet cheat 
 
-			InitializeComponent();
+			App.Current.MainPage = new GamePage(DifficultyLevel.Easy, true, "N");
 		}
 
 		private void OnStartTapped(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new GamePage("N");
+			App.Current.MainPage = new GamePage(DifficultyLevel.Easy, true, "N");
 
 		}
 

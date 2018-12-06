@@ -1,6 +1,9 @@
 using System;
 using System.Security.Cryptography;
 
+
+// File. CryptoRandom.cs
+// Description: Generates a random index to place a new tile
 namespace TWON
 {
 	///<summary>

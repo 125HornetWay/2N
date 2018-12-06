@@ -1,5 +1,6 @@
 using System;
 using Xamarin.Forms;
+// Represents a Tile
 
 namespace TWON
 {

@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+// File: HighScoreCollection.cs
+// Description: Manipulates High Score list
 namespace TWON.Model
 {
+	// Program's interface with the High Score collection
     public class HightScoreCollection
     {
-		public static List<HighScore> HighScores = new List<HighScore>();
+		public static List<HighScore> HighScores = new List<HighScore>(); // list of high scores
 		public HightScoreCollection()
 		{
 
 		}
 
-		public void OrganiseList()
+		public void OrganiseList() // Organize the list for display
 		{
 			int MaximumSize = 10;
 			if (HighScores.Count > MaximumSize)
@@ -33,7 +36,7 @@ namespace TWON.Model
 			//sort list by scores
 		}
 
-		public void Save(List<HighScore> HighScores)
+		public void Save(List<HighScore> HighScores) // Save high scores to file
 		{
 			int count = 1;
 			foreach (HighScore score in HighScores)
@@ -47,7 +50,7 @@ namespace TWON.Model
 			}
 		}
 
-		public List<string> Load()
+		public List<string> Load() // load scores from file
 		{
 			List<string> HighScoreData = new List<string>();
 			string line = "nothing yet";

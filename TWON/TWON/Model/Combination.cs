@@ -2,8 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+/*
+ * File: Combination.cs
+ * Description: Contains Combination class
+ */
+
 namespace TWON.Model
 {
+	//Combination: class that represents the merge of two grid pieces
     class Combination : Move
     {
 		// Index of piece the active piece is combined with

@@ -189,7 +189,7 @@ namespace TWON.View.Pages
 					HorizontalOptions = LayoutOptions.Center,
 					VerticalOptions = LayoutOptions.Center,
 					FontSize = 20,
-					TranslationY = -45,
+					TranslationY = -105,
 					IsVisible = false
 				};
 

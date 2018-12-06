@@ -5,36 +5,42 @@ using System.Linq;
 using TWON.Model;
 using static TWON.Direction;
 
+// File: Grid.cs
+// Description: Main model
+
 namespace TWON
 {
+	// Enum that represents which direction on the grid to move the pieces
 	public enum Direction
 	{
 		Up, Down, Left, Right
 	}
 
+	// Enum representing the difficulty level at which to initialize the grid
 	public enum DifficultyLevel
 	{
 		Easy, Medium, Hard
 	}
 
+	// Holds all the main data for the game and all of the methods for playing the game
 	public class Grid
 	{
-		public EventHandler<object> UpdateTimeEvent;
-		public Tile[] Tiles { get; set; }
-		public bool GameOver = false;
-		public bool cheatMode = false;
-		public static Tile[] SavedGrid;
+		public EventHandler<object> UpdateTimeEvent; // Event that fires to update the timer in the view
+		public Tile[] Tiles { get; set; } // List of Tiles that for mthe grid
+		public bool GameOver = false; // Boolean that represents whether the game is over or not
+		public bool cheatMode = false; // Represents whether cheat mode is active
+		public static Tile[] SavedGrid; // Holds a deserialized Tile grid
 
-		public int winningScore = 2048;
+		public int winningScore = 2048; // The tile value that needs to be obtained in order to win the game
 
-		public TimeSpan Time = TimeSpan.Zero;
+		public TimeSpan Time = TimeSpan.Zero; // Holds the amount of time the game has been active
 
-		protected static CryptoRandom rand = new CryptoRandom();
+		protected static CryptoRandom rand = new CryptoRandom();  // Random object for placing new tiles
 
-		public readonly int _columns;
-		private readonly int _gridSize;
+		public readonly int _columns; // number of columns
+		private readonly int _gridSize; // number of pieces in the grid
 
-		public bool UpdateTimer()
+		public bool UpdateTimer() // Adds a second to the timer every second the game is active
 		{
 			if (!GameOver)
 			{
@@ -50,7 +56,7 @@ namespace TWON
 
 		}
 
-		public string Serialize() {
+		public string Serialize() { // Serialize the model into a string to be saved
 			string s = _columns + ";";
 			s += Time.ToString() + ";";
 			for (int i = 0; i < Tiles.Length; i++)
@@ -63,7 +69,7 @@ namespace TWON
 			return s;
 		}
 
-		public static Grid Deserialize(string s)
+		public static Grid Deserialize(string s) // Deserialize a model string
 		{
 			string[] split = s.Split(';');
 			Grid grid = new Grid(Convert.ToInt32(split[0]));
@@ -81,7 +87,7 @@ namespace TWON
 			
 		}
 
-		public Grid(int size)
+		public Grid(int size) // Grid constructor
 		{
 			_columns = size;
 			_gridSize = size * size;
@@ -101,23 +107,23 @@ namespace TWON
 		}
 
 		// row # of item at idx
-		public int GetRow(int idx)
+		public int GetRow(int idx) // return the row of an index
 		{
 			return idx / _columns;
 		}
 
 		// column # of item at idx
-		public int GetColumn(int idx)
+		public int GetColumn(int idx) // return the column of an index
 		{
 			return idx % _columns;
 		}
 
-		public int GetIndex(int x, int y)
+		public int GetIndex(int x, int y) // return the index of a row and column
 		{
 			return y + x * _columns;
 		}
 
-		public Move MoveTile(int i, Direction d)
+		public Move MoveTile(int i, Direction d) // Move a tile on the grid
 		{
 			int finalIndex = i;
 			bool combination = false;
@@ -205,9 +211,10 @@ namespace TWON
 		}
 		
 
-		// use memoization so we don't have to iterate every time we call GetDirections()
+		// use memorization so we don't have to iterate every time we call GetDirections()
 		private readonly List<HashSet<Direction>> Dir_Memos = new List<HashSet<Direction>>();
 
+		// Generatea table of valid move directions for each piece on the grid
 		public List<HashSet<Direction>> GetDirections()
 		{
 			if (Dir_Memos.Count == 0)
@@ -314,7 +321,7 @@ namespace TWON
 			return moves;
 		}
 
-		public override string ToString()
+		public override string ToString() // prints Tile grid to the console
 		{
 			string output = "";
 
