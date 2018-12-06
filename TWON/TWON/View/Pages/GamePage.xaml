@@ -16,7 +16,7 @@
 				<Button x:Name="pause" Text="Pause" TextColor="White" Clicked="pause_Clicked"/>
 				<Label x:Name="TimeLabel" Text="0:00:00" TextColor="White"/>
 				<Label x:Name="ScoreLabel" Text="0" TextColor="White"/>
-				<Entry x:Name="Name" Text=" " TextColor ="Balck"/>
+				<Entry x:Name="Name" Text=" " FontAttributes="Bold"/>
 			</StackLayout>
 			<Grid x:Name="GameGrid" BackgroundColor="DimGray" Padding="5" AbsoluteLayout.LayoutBounds="0.5, 0.6" AbsoluteLayout.LayoutFlags="PositionProportional">
 
