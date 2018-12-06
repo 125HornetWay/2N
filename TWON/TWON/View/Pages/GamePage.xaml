@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TWON.View.Pages.GamePage"
-			 BackgroundImage="lines.jpg">
+			 BackgroundImage="blueprint.jpg">
     <ContentPage.Content>
 		<AbsoluteLayout >
 			<!-- AspectFill: https://stackoverflow.com/questions/41395248/xamarin-forms-image-fill-width-with-proper-aspect#41395453 -->
@@ -16,7 +16,7 @@
 				<Button x:Name="pause" Text="Pause" TextColor="White" Clicked="pause_Clicked"/>
 				<Label x:Name="TimeLabel" Text="0:00:00" TextColor="White"/>
 				<Label x:Name="ScoreLabel" Text="0" TextColor="White"/>
-				<Entry x:Name="TheName" Text=" " TextColor ="White"/>
+				<Entry x:Name="Name" Text=" " TextColor ="Balck"/>
 			</StackLayout>
 			<Grid x:Name="GameGrid" BackgroundColor="DimGray" Padding="5" AbsoluteLayout.LayoutBounds="0.5, 0.6" AbsoluteLayout.LayoutFlags="PositionProportional">
 

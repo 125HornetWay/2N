@@ -346,7 +346,7 @@ namespace TWON.View.Pages
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				//HighScore.CheckIfHighScore( , Scores.Score);
+				HighScore.CheckIfHighScore(Name.Text , Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -361,7 +361,7 @@ namespace TWON.View.Pages
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				//HighScore.CheckIfHighScore(pause.Text, Scores.Score);
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -377,7 +377,7 @@ namespace TWON.View.Pages
 			RotatePieces();
 			if (Model.GameOver)
 			{
-				//HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+				HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 				HightScoreCollection.Save();
 				App.Current.MainPage = new HighScoreScreen();
 			}
@@ -397,7 +397,7 @@ namespace TWON.View.Pages
 
 		private void Highestscores_Clicked(object sender, EventArgs e)
 		{
-			//HighScore.CheckIfHighScore(Name.Text, Scores.Score);
+			HighScore.CheckIfHighScore(Name.Text, Scores.Score);
 			HightScoreCollection.Save();
 			App.Current.MainPage = new HighScoreScreen();
 			
