@@ -16,13 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="swoosh.mp3" />
     <None Remove="View\Pages\LionKing.mp3" />
-    <None Remove="View\Pages\swoosh.mp3" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="swoosh.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Pages\LionKing.mp3" />
-    <EmbeddedResource Include="View\Pages\swoosh.mp3" />
   </ItemGroup>
 
   <ItemGroup>
