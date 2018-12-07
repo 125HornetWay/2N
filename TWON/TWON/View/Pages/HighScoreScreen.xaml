@@ -30,7 +30,7 @@
 				</Grid>
 
 				<Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
-					<Image x:Name ="HighScores" HeightRequest="100" HorizontalOptions="Center" Source="2N_Start_Button.gif" TranslationY="50" VerticalOptions="End" WidthRequest="100" />
+					<Button x:Name ="HighScores" HeightRequest="100" HorizontalOptions="Center" Clicked="HighScores_Clicked" TranslationY="50" VerticalOptions="End" WidthRequest="100" />
 				</Grid>
 
 				<Grid Grid.Row="3" Margin="0,30" ColumnSpacing="0" RowSpacing="0">

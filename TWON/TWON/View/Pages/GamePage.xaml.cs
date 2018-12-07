@@ -35,11 +35,12 @@ namespace TWON.View.Pages
 		public GamePage(DifficultyLevel dl, string N) : this(dl, false, N ) { }
 		public GamePage(DifficultyLevel dl, bool cm, string N)
 		{
-
+			TWON.Model.Animation.currentcombinations = new List<int>();
 			InitializeComponent();
 
-			//player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-			//player.Load("swoosh.mp3");
+			player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+			player.Load("swoosh.mp3");
+
 
 
 			int size = 4;
@@ -258,6 +259,7 @@ namespace TWON.View.Pages
 
 				if (move.GetType() == typeof(Shift))
 				{
+					player.Play();
 					Shift sMove = move as Shift;
 
 					// Update element value

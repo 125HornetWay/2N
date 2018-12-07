@@ -27,7 +27,7 @@ namespace TWON.View.Pages
 		
 		private void About_Clicked(object sender, EventArgs e)
 		{
-			App.Current.MainPage = new NavigationPage(new HomePage());
+			App.Current.MainPage = new AboutScreen();
 
 		}
 

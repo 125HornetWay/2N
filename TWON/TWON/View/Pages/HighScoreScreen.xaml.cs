@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TWON.Model;
+using TWON.View.Pages;
 
 namespace TWON.View
 {
@@ -37,6 +38,11 @@ namespace TWON.View
 			}
 
 			++Rank;
+		}
+
+		private void HighScores_Clicked(object sender, EventArgs e)
+		{
+			App.Current.MainPage = new GamePage("N");
 		}
 	}
 }
